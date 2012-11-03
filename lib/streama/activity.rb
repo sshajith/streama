@@ -63,6 +63,7 @@ module Streama
 
       def stream_of(actor, options={})
          query = {'actor.id' => actor.id, 'actor.type' => actor.class.to_s}
+         query.merge!(options[:query]) if options[:query]
          query.merge!({:verb => options[:type]}) if options[:type]
          self.where(query).desc(:created_at)
       end
